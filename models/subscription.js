@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi');
+
 module.exports.SubscriptionValidationSchema = Joi.object().keys({
     planId: Joi.number().positive().required(),
     coupon: Joi.number().min(0).max(100).optional().allow(null),
