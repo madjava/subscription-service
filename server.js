@@ -1,5 +1,8 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const useMiddlewares = require('./middleware/middleware');
+
+dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 const app = express();
