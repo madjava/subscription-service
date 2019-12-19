@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const asyncWrapper = require('../utilities/async.wrapper').AsyncWrapper;
+const asyncWrapper = require('../../utilities/async.wrapper').AsyncWrapper;
 const PlansService = require('../services/plans.service');
-const validator = require('../middleware/validation');
+const validator = require('../../middleware/validation');
 
 const plansService = new PlansService();
 
