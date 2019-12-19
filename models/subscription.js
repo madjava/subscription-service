@@ -1,4 +1,7 @@
+const Joi = require('@hapi/joi');
+
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const Subscription = sequelize.define('Subscription', {
     planId: DataTypes.INTEGER,
@@ -6,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     cardNumber: DataTypes.STRING,
     holderName: DataTypes.STRING,
     expirationDate: DataTypes.STRING,
-    cvv: DataTypes.STRING
+    cvv: DataTypes.STRING,
+    userId: DataTypes.INTEGER
   }, {});
   Subscription.associate = function(models) {
     // associations can be defined here

@@ -1,9 +1,19 @@
+const { Subscription } = require('../models/index');
+
 module.exports = class SubscriptionsService {
-    async findAll(userId) { }
+    async findAll(userId) {
+        return await Subscription.findAll({ where: { userId } });
+    }
 
-    async findOne(id) { }
+    async findOne(id) {
+        return await Subscription.findOne({ where: { id } });
+    }
 
-    async create(subscription) { }
+    async create(subscription) {
+        return await Subscription.create(subscription);
+    }
 
-    async deleteOne(id) { }
+    async deleteOne(id) {
+        return await Subscription.destroy({ where: { id } });
+    }
 }

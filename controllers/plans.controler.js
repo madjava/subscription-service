@@ -7,7 +7,7 @@ const plansService = new PlansService();
 
 // api/plans
 router.get('/', asyncWrapper(async (req, res) => {
-   const userId = null;
+   const userId = 1;
    const plans = await plansService.findAll(userId);
    res.send(plans);
 }));
@@ -29,7 +29,7 @@ router.post('/', [validator('Plan')] ,asyncWrapper(async (req, res) => {
 // api/plans/:id
 router.delete('/:id', asyncWrapper(async (req, res) => {
     const id = req.params.id;
-    await PlansService.deleteOne(id);
+    await plansService.deleteOne(id);
     res.sendStatus(200);
 }));
 
