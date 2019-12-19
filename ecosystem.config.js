@@ -1,4 +1,4 @@
-const AMQP_CONNECTION_STRING = '<your rabitmq connection string>';
+const AMQP_CONNECTION_STRING = '<your rabbitmq connection string>';
 const AMQP_CHANNEL_NAME = 'PAYMENTS_GATEWAY';
 const AMQP_QUEUE_NAME = 'PAYMEMTS_QUEUE';
 
