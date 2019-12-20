@@ -43,3 +43,7 @@ sequelize model:generate --name Subscription --attributes planId:integer,coupon:
 ```bash
 sequelize db:migrate
 ```
+
+```bash
+ docker run --name plans-cache -p 6380:6379 -d redis
+```

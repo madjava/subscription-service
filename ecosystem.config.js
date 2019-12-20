@@ -1,4 +1,4 @@
-const AMQP_CONNECTION_STRING = '<your amqp connection string>';
+const AMQP_CONNECTION_STRING = 'amqp://stgpytot:1DEW5R5e7OfweWc3G89Gf41bRBjOhNhJ@stingray.rmq.cloudamqp.com/stgpytot';
 const AMQP_CHANNEL_NAME = 'PAYMENTS_GATEWAY';
 const AMQP_QUEUE_NAME = 'PAYMEMTS_QUEUE';
 
@@ -20,7 +20,10 @@ module.exports = {
                 MYSQL_DB: 'PlansDb',
                 PORT: 3001,
                 TOKEN_ISSUER,
-                AUTH_SECRET
+                AUTH_SECRET,
+                REDIS_HOST: 'localhost',
+                REDIS_PORT: '6380',
+                REDIS_PASSWORD: ''
             },
             env_production: {
                 NODE_ENV: 'production',

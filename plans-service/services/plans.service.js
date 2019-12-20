@@ -1,8 +1,26 @@
 const { Plan } = require('../models/index');
+const CachingService = require('../services/caching.service');
 
 module.exports = class PlanService {
+
+    constructor() {
+        this.cachingService = new CachingService({
+            host: process.env.REDIS_HOST,
+            port: process.env.REDIS_PORT,
+            password: process.env.REDIS_PASSWORD
+        });
+    }
+
     async findAll(userId) {
-        return await Plan.findAll({ where: { userId } });
+        let plans = await this.cachingService.getPlans(userId);
+        if (plans) {
+            console.log(`Plans ${plans.id} exits in redis`);
+            return plans;
+        }
+        plans = await Plan.findAll({ where: { userId } });
+        await this.cachingService.purgeCache(userId);
+        await this.cachingService.storePlans(userId, plans);
+        return plans;
     }
 
     async findOne(id) {
@@ -10,10 +28,16 @@ module.exports = class PlanService {
     }
 
     async create(plan) {
+        await this.cachingService.purgeCache(plan.userId);
         return await Plan.create(plan);
     }
 
     async deleteOne(id) {
-        return await Plan.destroy({ where: { id } });
+        let plan = await this.findOne(id);
+        if (plan) {
+            await this.cachingService.purgeCache(plan.userId);
+            return await Plan.destroy({ where: { id } });
+        }
+        return Promise.resolve();
     }
 }
