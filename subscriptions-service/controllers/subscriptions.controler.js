@@ -1,8 +1,11 @@
 const router = require('express').Router();
 const asyncWrapper = require('../../utilities/async.wrapper').AsyncWrapper;
 const SubcriptionsService = require('../services/subscriptions.service');
+const protectedRoute = require('../../middleware/protected.route');
 
 const subscriptionsService = new SubcriptionsService();
+
+router.use(protectedRoute());
 
 // api/subscriptions
 router.get('/', asyncWrapper(async (req, res) => {

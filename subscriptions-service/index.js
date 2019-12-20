@@ -1,15 +1,16 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const useMiddlewares = require('../middleware/middleware');
+const AuthenticationMiddleware = require('../middleware/auth');
 const ErrorHandlingMiddleware = require('../middleware/error-handling');
+const SubscriptionsController = require('./controllers/subscriptions.controler');
 
-dotenv.config();
 const PORT = process.env.PORT;
 
 const app = express();
  
-const SubscriptionsController = require('./controllers/subscriptions.controler');
 useMiddlewares(app);
+
+AuthenticationMiddleware(app);
 
 app.use('', SubscriptionsController);
 
