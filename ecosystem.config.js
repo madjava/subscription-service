@@ -1,6 +1,9 @@
-const AMQP_CONNECTION_STRING = '<your connection string>';
+const AMQP_CONNECTION_STRING = '<your amqp connection string>';
 const AMQP_CHANNEL_NAME = 'PAYMENTS_GATEWAY';
 const AMQP_QUEUE_NAME = 'PAYMEMTS_QUEUE';
+
+const TOKEN_ISSUER = 'saas';
+const AUTH_SECRET = 'alOigG£ee#4gJk';
 
 module.exports = {
     apps: [
@@ -15,7 +18,9 @@ module.exports = {
                 MYSQL_HOST: 'localhost',
                 MYSQL_PORT: 3307,
                 MYSQL_DB: 'PlansDb',
-                PORT: 3001
+                PORT: 3001,
+                TOKEN_ISSUER,
+                AUTH_SECRET
             },
             env_production: {
                 NODE_ENV: 'production',
@@ -35,7 +40,9 @@ module.exports = {
                 PORT: 3002,
                 AMQP_CONNECTION_STRING,
                 AMQP_CHANNEL_NAME,
-                AMQP_QUEUE_NAME
+                AMQP_QUEUE_NAME,
+                TOKEN_ISSUER,
+                AUTH_SECRET
             },
             env_production: {
                 NODE_ENV: 'production',
@@ -52,6 +59,24 @@ module.exports = {
             },
             env_production: {
 
+            }
+        }, {
+            name: "auth-service",
+            script: './auth-service/index.js',
+            watch: true,
+            env: {
+                NODE_ENV: 'development',
+                MYSQL_USER: 'root',
+                MYSQL_PASS: 'my-secret-pw',
+                MYSQL_HOST: 'localhost',
+                MYSQL_PORT: 3309,
+                MYSQL_DB: 'Users',
+                PORT: 3003,
+                TOKEN_ISSUER,
+                AUTH_SECRET
+            },
+            env_production: {
+                NODE_ENV: 'production'
             }
         }
     ]

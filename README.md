@@ -25,6 +25,14 @@ CREATE schema SubscriptionsDb CHARACTER SET 'utf8mb4';
 ```
 
 ```bash
+docker run --name auth-db -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3309:3306 -d mysql:5.7
+```
+
+```sql
+CREATE schema Users CHARACTER SET 'utf8mb4';
+```
+
+```bash
 sequelize model:generate --name Plan --attributes name:string,price:float,type:string,userId:integer --force
 ```
 
@@ -33,5 +41,5 @@ sequelize model:generate --name Subscription --attributes planId:integer,coupon:
 ```
 
 ```bash
-sequeslize db:migrate
+sequelize db:migrate
 ```
